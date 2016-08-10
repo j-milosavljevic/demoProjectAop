@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+	<!-- Ovaj fajl je vezan za servlet, ucitava jsp fajlove tj prikazuje stranice -->
+	
+	
+	<!-- Ovaj dodaje springove predefinisane beanove itd-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+ xmlns:context="http://www.springframework.org/schema/context"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xmlns:tx="http://www.springframework.org/schema/tx"
+ xmlns:mvc="http://www.springframework.org/schema/mvc"
+ xsi:schemaLocation="
+   http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+   http://www.springframework.org/schema/context
+   http://www.springframework.org/schema/context/spring-context-3.0.xsd
+   http://www.springframework.org/schema/tx
+   http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+   http://www.springframework.org/schema/mvc 
+   http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
+   	
+   		<!-- Ovaj gleda gde da trazi komponente za prikaz u JAVA RES delu- prva klasa od koje krece sve, obicno klasa kontrolera jer se u njemu nalaze stranice -->
+   	
+<context:component-scan base-package="controller" />   	
+   		<!-- Ovaj omogucava da spring ucita anotacije-->
+   	
+ 	<mvc:annotation-driven />
+ 
+ 	<!-- Ovaj dodaje web fajlove itd. -->
+ 
+ 	<mvc:resources mapping="/resources/**" location="/WEB-INF/" />
+   	
+   		<!-- Ovaj ubaci obavezno, gde ti se nalaze jsp fajlovi, putanja kako moze da ih otvori -->
+   	
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/views/"></property>
+		<property name="suffix" value=".jsp"></property>
+	</bean>
+	
+	
+		<!-- Ovaj dodaje springov listener za jsp fajlove i handler -->
+	
+	 <mvc:default-servlet-handler/>
+	 
+</beans>
